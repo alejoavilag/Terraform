@@ -5,7 +5,7 @@ const app = express()
 
 
 app.get('/api/res', function(req,res) {
-    const response = 'CI/CD deploy heroku'
+    const response = 'CI/CD deploy actualizacion hytrgujm'
     res.json({response})
     console.log(response)
 })
