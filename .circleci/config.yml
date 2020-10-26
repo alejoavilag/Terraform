@@ -1,0 +1,52 @@
+version: 2.1
+
+executors:
+    docker-node-12:
+        working_directory: *working_directory
+        docker:
+            - image: circleci/node:12.19
+
+orbs:
+    heroku: circleci/heroku@1.2.2
+    node: circleci/node@4.1.0
+
+
+jobs:
+    test:
+        executor: docker-node-12
+        steps:
+            - checkout
+            - run:
+                name: install project
+                command: npm install
+            - run:
+                name: running-tests
+                command: npm run test 
+    deploy:
+        executor: heroku/default
+        steps:
+            - checkout
+            - heroku/install
+            - run:
+                command: echo "heroku is deploy"
+            - heroku/deploy-via-git
+
+workflows:
+    test-and-deploy:
+        jobs:
+            - test
+            - verify-deploy:
+                type: approval
+                requires:
+                    - test
+            - deploy:
+                requires:
+                    - test
+                    - verify-deploy
+                filters:
+                    branches:
+                        only:
+                            - master
+
+
+
