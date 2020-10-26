@@ -36,9 +36,9 @@ jobs:
         steps:
             - checkout
             - heroku/install
-            - run:
-                name: nombre del proyecto
-                command: heroku apps:create $HEROKU_APP_NAME
+#            - run:
+#               name: nombre del proyecto
+#                command: heroku apps:create $HEROKU_APP_NAME
             - run:
                 name: Deploy heroku
                 command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master

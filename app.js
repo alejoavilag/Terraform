@@ -5,7 +5,7 @@ const app = express()
 
 
 app.get('/api/res', function(req,res) {
-    const response = 'terraformHeroku'
+    const response = 'CI/CD deploy heroku'
     res.json({response})
     console.log(response)
 })
